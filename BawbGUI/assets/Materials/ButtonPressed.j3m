@@ -1,0 +1,10 @@
+Material My Material : Common/MatDefs/Misc/Unshaded.j3md {
+     MaterialParameters {
+        VertexColor : false
+        ColorMap : "Textures/Gui/WoodUI/TextBTN_Big_Pressed.png"
+        ShadowMap0 : Flip 
+        AlphaDiscardThreshold : 0.1
+     }
+    AdditionalRenderState {
+    }
+}
