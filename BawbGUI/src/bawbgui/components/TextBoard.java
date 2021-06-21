@@ -32,7 +32,8 @@ public class TextBoard extends GuiComponent {
     
     private float        height;
     private float        width;
-    
+    private float        scale = 1;
+     
     private boolean onClose;
     
     public TextBoard(Node guiNode) {
@@ -107,17 +108,26 @@ public class TextBoard extends GuiComponent {
     }
     
     public void setText(String title, String message) {
+        unscale();
         titleText.setText(title);
         messageText.setText(message);
         shadowText.setText(message.replaceAll(COLOR_PATTERN.toString(),""));
         titleText.setLocalTranslation(-titleText.getLineWidth()/2,height-height/12 + titleText.getLineHeight()/1.5f,0);
         messageText.setLocalTranslation(-messageText.getLineWidth()/2.1f, height-messageText.getLineHeight()*2,0);
         shadowText.setLocalTranslation(-messageText.getLineWidth()/2.09f, height-messageText.getLineHeight()*2.05f,0);
+        scale(scale);
+    }
+    
+    private void unscale() {
+        super.scale(1/scale);
+        height*=1/scale;
+        width*=1/scale;
     } 
     
     @Override
     public void scale(float val) {
         super.scale(val);
+        scale = val;
         height*=val;
         width*=val;
     }
