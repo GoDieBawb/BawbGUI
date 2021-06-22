@@ -78,10 +78,10 @@ public class TextBoard extends GuiComponent {
         titleText.setSize(Display.getWidth()/25);
         messageText.setSize(Display.getWidth()/25);
         messageText.setLineWrapMode(LineWrapMode.Word);
-        messageText.setBox(new Rectangle(0,0,width*2-50,height-5));
+        messageText.setBox(new Rectangle(0,0,width*2-60,height-5));
         shadowText.setSize(Display.getWidth()/25);
         shadowText.setLineWrapMode(LineWrapMode.Word);
-        shadowText.setBox(new Rectangle(0,0,width*2-50,height-5));     
+        shadowText.setBox(new Rectangle(0,0,width*2-60,height-5));     
         shadowText.setColor(ColorRGBA.Black);
         closeButton.setLocalTranslation(width+nBox.xExtent/1.8f, height-nBox.yExtent*1.2f, 0);
         buttonOutline.setLocalTranslation(closeButton.getLocalTranslation());

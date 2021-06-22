@@ -147,6 +147,10 @@ public class AlertBox extends GuiComponent {
         buttonText.setLocalTranslation(-buttonText.getLineWidth()/2,-height+height/6+buttonText.getLineHeight()/1.5f,0);
     }
     
+    public String getButtonText() {
+        return buttonText.getText();
+    }
+    
     public void setMessageText(String text) {
         messageText.setText(text);
         shadowText.setText(text.replaceAll(COLOR_PATTERN.toString(),""));        

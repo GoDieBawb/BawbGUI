@@ -82,7 +82,7 @@ public class Main extends SimpleApplication {
     private void testChoiceBox() {
         
         TextBoard textBoard = new TextBoard(guiNode);
-        textBoard.showMessage("Test", "A Test Message");
+        textBoard.showMessage("Test", "A Test Message that is pretty lon Here it is");
         textBoard.scale(.5f);
         
         ArrayList<String> x = new ArrayList<>(Arrays.asList("Agree", "Disagree", "Walk", "Run", "Eat", "Drink"));        
