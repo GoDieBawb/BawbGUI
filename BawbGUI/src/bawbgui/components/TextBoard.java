@@ -34,7 +34,8 @@ public class TextBoard extends GuiComponent {
     private float        width;
     private float        scale = 1;
      
-    private boolean onClose;
+    private boolean   onClose;
+    private ChoiceBox choiceBox;
     
     public TextBoard(Node guiNode) {
         super(guiNode);       
@@ -58,6 +59,7 @@ public class TextBoard extends GuiComponent {
             @Override
             public void onClick() {
                 super.onClick();
+                hide();
             }
         };
         
@@ -130,6 +132,17 @@ public class TextBoard extends GuiComponent {
         scale = val;
         height*=val;
         width*=val;
+    }
+    
+    @Override
+    public void hide() {
+        super.hide();
+        if (choiceBox != null)
+            choiceBox.hide();
+    }
+    
+    public void setChoiceBox(ChoiceBox cb) {
+        choiceBox = cb;
     }
     
     public float getHeight() {

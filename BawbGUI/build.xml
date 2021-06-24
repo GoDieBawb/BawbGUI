@@ -62,7 +62,7 @@
 
         <target name="run" depends="BasicGameTemplate-impl.jar">
             <exec dir="bin" executable="launcher.exe">
-                <arg file="${dist.jar}"/>
+                <arg file="bawbgui.jar"/>
             </exec>
         </target>
 

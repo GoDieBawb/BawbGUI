@@ -19,25 +19,53 @@ import org.lwjgl.opengl.Display;
  */
 public class ChoiceBox extends GuiComponent {
     
-    private final ArrayList<String>  choices;
+    private final ArrayList<String>     choices;
+    private final ArrayList<Clickable>  buttons;
+    private final ArrayList<BitmapText> buttonTexts;
     
     private TextBoard  textBoard;
     
     public ChoiceBox( Node guiNode, ArrayList<String>  choices) {
         super(guiNode);
         this.choices  = choices;
-        createButtons();
+        buttons       = new ArrayList<>();
+        buttonTexts   = new ArrayList<>();
     }
     
     public ChoiceBox( Node guiNode, ArrayList<String>  choices, TextBoard textBoard) {
         super(guiNode);
         this.choices  = choices;
-        createButtons();
         this.textBoard = textBoard;
-        setPosition(textBoard.getPosition().x, textBoard.getPosition().y-textBoard.getHeight()*1.42f, 1);        
+        buttons        = new ArrayList<>();
+        buttonTexts   = new ArrayList<>();        
+        textBoard.setChoiceBox(this);
     }    
     
-    private void createButtons() {
+    @Override
+    public void show() {
+        super.show();
+        clearButtons();
+        createButtons();
+        if (textBoard != null)
+        setPosition(textBoard.getPosition().x, textBoard.getPosition().y-textBoard.getHeight()*1.42f, 1);  
+    }
+    
+    @Override 
+    public void hide() {
+        super.hide();
+        clearButtons();
+    }
+    
+    public void clearButtons() {
+        for (int i = 0; i < buttons.size(); i++) {
+            detach(buttons.get(i));
+            buttonTexts.get(i).removeFromParent();
+        }
+        buttons.clear();
+        buttonTexts.clear();
+    }
+    
+    public void createButtons() {
         name                 = "ChoiceBox";
         float   width        = Display.getWidth()/4f;
         float   height       = (Display.getHeight()/22+4)*3;
@@ -49,6 +77,8 @@ public class ChoiceBox extends GuiComponent {
         
         attach(backBoard);
         setPosition(width,height,.25f);
+        
+        int row = 0;
         
         for (int i = 0; i < choices.size(); i++) {
             
@@ -72,11 +102,13 @@ public class ChoiceBox extends GuiComponent {
                 
             };
             
-            float      x   = -buttonWidth*1.1f;        
-            if (i>2)   x   = buttonWidth*1.1f;
-            float      y   = height*.65f-(buttonHeight*2+5)*i;
-            if (i>2)   y   = height*.65f-(buttonHeight*2+5)*(i-3);
-            
+            float x = -buttonWidth*1.1f;     
+            float y = height*.65f-(buttonHeight*2+5)*(row);
+            if (i%2==1) { 
+                x   = buttonWidth*1.1f;
+                row++;
+            }
+
             attach(g);
             attach(b);
             g.setLocalTranslation(x, y, 0);
@@ -84,6 +116,8 @@ public class ChoiceBox extends GuiComponent {
             g.setName(s);
             b.setText(s);
             b.setLocalTranslation(g.getLocalTranslation().add(-b.getLineWidth()/2, b.getLineHeight(), .1f));
+            buttons.add(g);
+            buttonTexts.add(b);
             
         }
         
